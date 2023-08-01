@@ -3,13 +3,14 @@ import 'package:online_learning_app/export.dart';
 import '../../../bloc/course/video/get_video_by_course_id_and_author_id/get_video_by_course_id_and_author_id_bloc.dart';
 
 class DetailCourseScreen extends StatelessWidget {
-  const DetailCourseScreen({super.key});
+  final dynamic args;
+  const DetailCourseScreen({super.key, this.args});
 
   @override
   Widget build(BuildContext context) {
-    Map<String, dynamic> arguments = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    Course course = arguments['course'] as Course;
-    Lecturer lecturer = arguments['lecturer'] as Lecturer;
+    // Map<String, dynamic> arguments = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    // Course course = arguments['course'] as Course;
+    // Lecturer lecturer = arguments['lecturer'] as Lecturer;
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -60,7 +61,7 @@ class DetailCourseScreen extends StatelessWidget {
                         Row(
                           children: [
                             Text(
-                              course.title!,
+                              args["title"],
                               style: whiteTextStyle.copyWith(
                                 fontSize: 25,
                                 fontWeight: bold,
@@ -82,13 +83,13 @@ class DetailCourseScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 5),
                         Text(
-                          'by ${lecturer.name}',
+                          'by ${args["lecturer_name"]}',
                           style: greyTextStyle.copyWith(fontSize: 14, fontWeight: regular),
                         ) // Adds a subtitle to the card
                       ],
                     ),
                     Text(
-                      course.categoryName!,
+                      args["category_name"],
                       style: whiteTextStyle.copyWith(fontSize: 14, fontWeight: bold),
                     ) // Adds a price to the bottom of the card
                   ],
@@ -103,7 +104,7 @@ class DetailCourseScreen extends StatelessWidget {
                 ),
               ),
               Text(
-                course.description!,
+                args["description"],
                 style: blackTextStyle.copyWith(
                   fontSize: 14,
                   fontWeight: regular,
@@ -120,7 +121,7 @@ class DetailCourseScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               BlocBuilder<GetVideoByCourseIdAndAuthorIdBloc, GetVideoByCourseIdAndAuthorIdState>(
-                bloc: context.read<GetVideoByCourseIdAndAuthorIdBloc>()..add(VideoByCourseIdAndAuthorIdEvent(courseId: course.id.toString())),
+                bloc: context.read<GetVideoByCourseIdAndAuthorIdBloc>()..add(VideoByCourseIdAndAuthorIdEvent(courseId: args["id_course"].toString())),
                 builder: (context, state) {
                   if (state is GetVideoByCourseIdAndAuthorIdLoading) {
                     return const Center(
@@ -140,13 +141,13 @@ class DetailCourseScreen extends StatelessWidget {
                           var video = state.video.data![index];
                           return InkWell(
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => VideoPlayer(),
-                                  // settings: RouteSettings(arguments: video),
-                                ),
-                              );
+                              if (video.courseId != null && video.id != null && video.video != null) {
+                                Navigator.of(context, rootNavigator: true).pushNamed("/detail-video", arguments: {
+                                  "id_course": video.courseId.toString(),
+                                  "id_video": video.id.toString(),
+                                  "url_video": video.video,
+                                });
+                              }
                             },
                             child: Container(
                               margin: const EdgeInsets.only(bottom: 16),
@@ -170,7 +171,13 @@ class DetailCourseScreen extends StatelessWidget {
                                     fontWeight: regular,
                                   ),
                                 ),
-
+                                // subtitle: Text(
+                                //   video.video!,
+                                //   style: whiteTextStyle.copyWith(
+                                //     fontSize: 16,
+                                //     fontWeight: regular,
+                                //   ),
+                                // ),
                                 // trailing: const Icon(
                                 //   Icons.check_circle,
                                 //   size: 30,

@@ -70,7 +70,6 @@ class _ExploreScreenState extends State<ExploreScreen> {
                 },
                 onChanged: (value) {
                   // (value == "" || value.isEmpty) ? : true;
-
                   value = searchController.text;
                   if (value.isEmpty) {
                     refreshData();
@@ -130,7 +129,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                             } else if (state is GetCourseSuccess) {
                               var dataLength = state.course.data!.length;
                               return ListView.builder(
-                                physics: NeverScrollableScrollPhysics(),
+                                physics: const NeverScrollableScrollPhysics(),
                                 scrollDirection: Axis.vertical,
                                 shrinkWrap: true,
                                 itemCount: dataLength,

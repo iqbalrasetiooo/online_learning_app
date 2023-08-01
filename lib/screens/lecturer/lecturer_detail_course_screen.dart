@@ -1,13 +1,14 @@
 import 'package:online_learning_app/bloc/course/video/get_video_by_course_id_and_author_id/get_video_by_course_id_and_author_id_bloc.dart';
-import '../../data/models/course/course_model.dart';
+// import '../../data/models/course/course_model.dart';
 import 'package:online_learning_app/export.dart';
 
 class LecturerDetailCourse extends StatelessWidget {
-  const LecturerDetailCourse({super.key});
+  final dynamic args;
+  const LecturerDetailCourse({super.key, this.args});
 
   @override
   Widget build(BuildContext context) {
-    final course = ModalRoute.of(context)!.settings.arguments as Data;
+    // final course = ModalRoute.of(context)!.settings.arguments as Data;
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -30,7 +31,14 @@ class LecturerDetailCourse extends StatelessWidget {
                 children: [
                   CustomButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/add-video', arguments: course);
+                      Navigator.pushNamed(
+                        context,
+                        '/add-video',
+                        arguments: {
+                          "id": args["id"],
+                          "title": args["title"],
+                        },
+                      );
                     },
                     title: "Tambah Video",
                     style: whiteTextStyle.copyWith(fontSize: 10, fontWeight: semibold),
@@ -57,7 +65,7 @@ class LecturerDetailCourse extends StatelessWidget {
               ),
               const SizedBox(height: 25),
               Text(
-                course.title!,
+                args["title"],
                 style: orangeTextStyle.copyWith(fontSize: 25, fontWeight: bold),
               ),
               const SizedBox(height: 18),
@@ -67,7 +75,7 @@ class LecturerDetailCourse extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               Text(
-                course.description!,
+                args["description"],
                 style: blackTextStyle.copyWith(fontSize: 14, fontWeight: regular),
               ),
               const SizedBox(height: 16),
@@ -77,7 +85,7 @@ class LecturerDetailCourse extends StatelessWidget {
               ),
               const SizedBox(height: 24),
               BlocBuilder<GetVideoByCourseIdAndAuthorIdBloc, GetVideoByCourseIdAndAuthorIdState>(
-                bloc: context.read<GetVideoByCourseIdAndAuthorIdBloc>()..add(VideoByCourseIdAndAuthorIdEvent(courseId: course.id.toString())),
+                bloc: context.read<GetVideoByCourseIdAndAuthorIdBloc>()..add(VideoByCourseIdAndAuthorIdEvent(courseId: args['id'].toString())),
                 builder: (context, state) {
                   if (state is GetVideoByCourseIdAndAuthorIdLoading) {
                     return const Center(

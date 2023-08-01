@@ -127,17 +127,13 @@ class _HomeScreenState extends State<HomeScreen> {
                               var lecturer = state.joinedCourse.data!.lecturer![index];
                               return InkWell(
                                 onTap: () {
-                                  Map<String, dynamic> arguments = {
-                                    'course': course,
-                                    'lecturer': lecturer,
-                                  };
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const DetailCourseScreen(),
-                                      settings: RouteSettings(arguments: arguments),
-                                    ),
-                                  );
+                                  Navigator.of(context, rootNavigator: true).pushNamed("/detail-course", arguments: {
+                                    "id_course": course.id.toString(),
+                                    "title": course.title,
+                                    "category_name": course.categoryName,
+                                    "description": course.description,
+                                    "lecturer_name": lecturer.name,
+                                  });
                                 },
                                 child: Container(
                                   margin: const EdgeInsets.only(bottom: 16),
@@ -233,17 +229,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                     var lecturer = state.joinedCourse.data!.lecturer![index];
                                     return InkWell(
                                       onTap: () {
-                                        Map<String, dynamic> arguments = {
-                                          'course': course,
-                                          'lecturer': lecturer,
-                                        };
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => const DetailCourseScreen(),
-                                            settings: RouteSettings(arguments: arguments),
-                                          ),
-                                        );
+                                        Navigator.of(context, rootNavigator: true).pushNamed("/detail-course", arguments: {
+                                          "id_course": course.id.toString(),
+                                          "title": course.title,
+                                          "category_name": course.categoryName,
+                                          "description": course.description,
+                                          "lecturer_name": lecturer.name,
+                                        });
                                       },
                                       child: Container(
                                         margin: const EdgeInsets.only(bottom: 16),

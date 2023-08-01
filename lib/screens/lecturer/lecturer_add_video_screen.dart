@@ -4,13 +4,14 @@ import '../../bloc/course/video/add_video/add_video_bloc.dart';
 import '../../data/models/course/course_model.dart';
 
 class LecturerAddVideoScreen extends StatelessWidget {
-  const LecturerAddVideoScreen({super.key});
+  final dynamic args;
+  const LecturerAddVideoScreen({super.key, this.args});
 
   @override
   Widget build(BuildContext context) {
     TextEditingController videoTitleC = TextEditingController();
     TextEditingController videourlC = TextEditingController();
-    final course = ModalRoute.of(context)!.settings.arguments as Data;
+    // final course = ModalRoute.of(context)!.settings.arguments as Data;
     Future storeData() async {
       String? user = await storage.readData('user');
       UserModelStorage appUserModel = UserModelStorage.deserialize(user!);
@@ -19,7 +20,7 @@ class LecturerAddVideoScreen extends StatelessWidget {
               title: videoTitleC.text,
               videoUrl: videourlC.text,
               authorId: appUserModel.idUser,
-              courseId: course.id.toString(),
+              courseId: args["id"].toString(),
             ),
           );
     }
@@ -47,7 +48,7 @@ class LecturerAddVideoScreen extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               Text(
-                '${course.title}',
+                '${args["title"]}',
                 style: blackTextStyle.copyWith(
                   fontSize: 18,
                   fontWeight: bold,

@@ -163,7 +163,16 @@ class LecturerHomeScreen extends StatelessWidget {
                                       var course = state.course.data![index];
                                       return InkWell(
                                         onTap: () {
-                                          Navigator.pushNamed(context, '/lecturer-detail', arguments: course);
+                                          Navigator.pushNamed(
+                                            context,
+                                            '/lecturer-detail',
+                                            arguments: {
+                                              "id": course.id,
+                                              "title": course.title,
+                                              "image": course.image,
+                                              "description": course.description,
+                                            },
+                                          );
                                         },
                                         child: ListTile(
                                           title: Text(
@@ -176,6 +185,8 @@ class LecturerHomeScreen extends StatelessWidget {
                                           subtitle: Text(
                                             course.description.toString(),
                                             style: greyTextStyle.copyWith(fontWeight: regular),
+                                            maxLines: 3,
+                                            overflow: TextOverflow.ellipsis,
                                           ),
                                           trailing: IconButton(
                                             onPressed: () {
@@ -323,13 +334,24 @@ class LecturerHomeScreen extends StatelessWidget {
                                             var course = state.course.data![index];
                                             return InkWell(
                                               onTap: () {
-                                                Navigator.pushNamed(context, '/lecturer-detail', arguments: course);
+                                                Navigator.pushNamed(
+                                                  context,
+                                                  '/lecturer-detail',
+                                                  arguments: {
+                                                    "id": course.id,
+                                                    "title": course.title,
+                                                    "image": course.image,
+                                                    "description": course.description,
+                                                  },
+                                                );
                                               },
                                               child: ListTile(
                                                 title: Text(course.title.toString(), style: blackTextStyle.copyWith(fontSize: 16, fontWeight: bold)),
                                                 subtitle: Text(
                                                   course.description.toString(),
                                                   style: greyTextStyle.copyWith(fontWeight: regular),
+                                                  maxLines: 3,
+                                                  overflow: TextOverflow.ellipsis,
                                                 ),
                                                 trailing: IconButton(
                                                   onPressed: () {

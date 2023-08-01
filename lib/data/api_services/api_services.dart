@@ -42,6 +42,10 @@ class ApiServices {
     return await getData(relativeUrl: '/categories');
   }
 
+  Future getVideoById({required String id}) async {
+    return await getData(relativeUrl: '/video/$id');
+  }
+
   Future getCourseByIdLecturer({required String id}) async {
     return await getData(relativeUrl: '/course/lecturer/$id');
   }
