@@ -1,6 +1,8 @@
 import 'package:online_learning_app/bloc/course/category/add_category/add_category_bloc.dart';
 import 'package:online_learning_app/bloc/course/video/get_video_by_id/get_video_by_id_bloc.dart';
+import 'package:online_learning_app/bloc/user/delete_user/delete_user_bloc.dart';
 import 'package:online_learning_app/screens/admin/add_category_screen.dart';
+import 'package:online_learning_app/screens/user/user_edit_profile_screen.dart';
 
 import 'bloc/course/join_course/join_bloc.dart';
 import 'bloc/course/video/add_video/add_video_bloc.dart';
@@ -71,6 +73,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => GetVideoByIdBloc(),
         ),
+        BlocProvider(
+          create: (context) => DeleteUserBloc(),
+        ),
       ],
       child: const App(),
     );
@@ -124,6 +129,7 @@ class App extends StatelessWidget {
       '/profil': (context) => const ProfileScreen(),
       '/detail-course': (context) => DetailCourseScreen(args: settings.arguments),
       '/detail-video': (context) => VideoPlayer(args: settings.arguments),
+      '/edit-profile': (context) => const EditProfileScreen(),
       //Lecturer Route
       '/author-main': (context) => const AuthorHomeScreen(arguments: {}),
       '/lecturer-main': (context) => const LecturerHomeScreen(arguments: {}),

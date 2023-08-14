@@ -75,12 +75,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       }
                     },
                   ),
-                  InkWell(
-                    onTap: () => Navigator.of(context).pushNamed('/settings'),
-                    child: const SizedBox(
-                      child: CircleAvatar(),
-                    ),
-                  ),
                 ],
               ),
               const SizedBox(height: 50),
@@ -118,77 +112,83 @@ class _HomeScreenState extends State<HomeScreen> {
                       builder: (context, state) {
                         if (state is GetUserJoinedCourseSuccess) {
                           var dataLength = state.joinedCourse.data!.course!.length;
-                          return ListView.builder(
-                            shrinkWrap: true,
-                            scrollDirection: Axis.vertical,
-                            itemCount: dataLength,
-                            itemBuilder: (context, index) {
-                              var course = state.joinedCourse.data!.course![index];
-                              var lecturer = state.joinedCourse.data!.lecturer![index];
-                              return InkWell(
-                                onTap: () {
-                                  Navigator.of(context, rootNavigator: true).pushNamed("/detail-course", arguments: {
-                                    "id_course": course.id.toString(),
-                                    "title": course.title,
-                                    "category_name": course.categoryName,
-                                    "description": course.description,
-                                    "lecturer_name": lecturer.name,
-                                  });
-                                },
-                                child: Container(
-                                  margin: const EdgeInsets.only(bottom: 16),
-                                  child: Card(
-                                    elevation: 0,
-                                    color: kTileColor,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        Padding(
-                                          padding: const EdgeInsets.all(15),
-                                          child: Row(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: <Widget>[
-                                              Image.asset(
-                                                "assets/logo.png",
-                                                height: 75,
-                                                width: 75,
-                                                fit: BoxFit.cover,
-                                              ),
-                                              Container(width: 20),
-                                              Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                children: <Widget>[
-                                                  Text(
-                                                    course.title!,
-                                                    style: whiteTextStyle.copyWith(fontSize: 16, fontWeight: bold),
-                                                  ),
-                                                  Container(height: 5),
-                                                  Text(
-                                                    lecturer.name!,
-                                                    style: greyTextStyle.copyWith(fontSize: 12, fontWeight: regular),
-                                                  ),
-                                                  Container(height: 16),
-                                                  Text(
-                                                    "Progress ",
-                                                    maxLines: 2,
-                                                    style: whiteTextStyle.copyWith(fontSize: 14),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
+                          if (state.joinedCourse.data!.course!.isNotEmpty) {
+                            return ListView.builder(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.vertical,
+                              itemCount: dataLength,
+                              itemBuilder: (context, index) {
+                                var course = state.joinedCourse.data!.course![index];
+                                var lecturer = state.joinedCourse.data!.lecturer![index];
+                                return InkWell(
+                                  onTap: () {
+                                    Navigator.of(context, rootNavigator: true).pushNamed("/detail-course", arguments: {
+                                      "id_course": course.id.toString(),
+                                      "title": course.title,
+                                      "category_name": course.categoryName,
+                                      "description": course.description,
+                                      "lecturer_name": lecturer.name,
+                                    });
+                                  },
+                                  child: Container(
+                                    margin: const EdgeInsets.only(bottom: 16),
+                                    child: Card(
+                                      elevation: 0,
+                                      color: kTileColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Padding(
+                                            padding: const EdgeInsets.all(15),
+                                            child: Row(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: <Widget>[
+                                                Image.asset(
+                                                  "assets/logo.png",
+                                                  height: 75,
+                                                  width: 75,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                                Container(width: 20),
+                                                Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: <Widget>[
+                                                    Text(
+                                                      course.title!,
+                                                      style: whiteTextStyle.copyWith(fontSize: 16, fontWeight: bold),
+                                                    ),
+                                                    Container(height: 6),
+                                                    Text(
+                                                      "oleh : ${lecturer.name!}",
+                                                      style: greyTextStyle.copyWith(fontSize: 12, fontWeight: regular),
+                                                    ),
+                                                    Container(height: 16),
+                                                    Text(
+                                                      "${course.categoryName}",
+                                                      style: greyTextStyle.copyWith(fontSize: 12, fontWeight: regular),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                              );
-                            },
-                          );
+                                );
+                              },
+                            );
+                          } else {
+                            return Text(
+                              'data kosong',
+                              style: redTextStyle.copyWith(fontSize: 50),
+                            );
+                          }
                         } else if (state is GetUserJoinedCourseError) {
                           return Center(
                             child: Text(
@@ -229,13 +229,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                     var lecturer = state.joinedCourse.data!.lecturer![index];
                                     return InkWell(
                                       onTap: () {
-                                        Navigator.of(context, rootNavigator: true).pushNamed("/detail-course", arguments: {
-                                          "id_course": course.id.toString(),
-                                          "title": course.title,
-                                          "category_name": course.categoryName,
-                                          "description": course.description,
-                                          "lecturer_name": lecturer.name,
-                                        });
+                                        Navigator.of(context, rootNavigator: true).pushNamed(
+                                          "/detail-course",
+                                          arguments: {
+                                            "id_course": course.id.toString(),
+                                            "title": course.title,
+                                            "category_name": course.categoryName,
+                                            "description": course.description,
+                                            "lecturer_name": lecturer.name,
+                                          },
+                                        );
                                       },
                                       child: Container(
                                         margin: const EdgeInsets.only(bottom: 16),
@@ -268,16 +271,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           course.title!,
                                                           style: whiteTextStyle.copyWith(fontSize: 16, fontWeight: bold),
                                                         ),
-                                                        Container(height: 5),
+                                                        Container(height: 6),
                                                         Text(
-                                                          lecturer.name!,
+                                                          "oleh : ${lecturer.name!}",
                                                           style: greyTextStyle.copyWith(fontSize: 12, fontWeight: regular),
                                                         ),
                                                         Container(height: 16),
                                                         Text(
-                                                          "Progress ",
-                                                          maxLines: 2,
-                                                          style: whiteTextStyle.copyWith(fontSize: 14),
+                                                          "${course.categoryName}",
+                                                          style: greyTextStyle.copyWith(fontSize: 12, fontWeight: regular),
                                                         ),
                                                       ],
                                                     ),

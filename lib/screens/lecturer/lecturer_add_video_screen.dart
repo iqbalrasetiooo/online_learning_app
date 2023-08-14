@@ -1,5 +1,6 @@
 import 'package:online_learning_app/data/models/app/user_model.dart';
 import 'package:online_learning_app/export.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import '../../bloc/course/video/add_video/add_video_bloc.dart';
 import '../../data/models/course/course_model.dart';
 

@@ -223,62 +223,32 @@ class LecturerHomeScreen extends StatelessWidget {
                                                       ),
                                                       TextButton(
                                                         onPressed: () {
-                                                          BlocListener<DeleteCourseBloc, DeleteCourseState>(
-                                                            bloc: context.read<DeleteCourseBloc>()..add(DeleteCourseByIdEvent(id: course.id.toString())),
-                                                            listener: (context, state) {
-                                                              if (state is DeleteCourseSuccess) {
-                                                                ScaffoldMessenger.of(context).showSnackBar(
-                                                                  SnackBar(
-                                                                    duration: const Duration(seconds: 3),
-                                                                    behavior: SnackBarBehavior.floating,
-                                                                    elevation: 0,
-                                                                    backgroundColor: kGreenColor,
-                                                                    content: Row(
-                                                                      children: [
-                                                                        const Icon(
-                                                                          Icons.beenhere_rounded,
-                                                                          color: Colors.white,
-                                                                        ),
-                                                                        const SizedBox(width: 12),
-                                                                        Text(
-                                                                          state.message,
-                                                                          style: whiteTextStyle.copyWith(
-                                                                            fontSize: 14,
-                                                                            fontWeight: bold,
-                                                                          ),
-                                                                        ),
-                                                                      ],
+                                                          context.read<DeleteVideoBloc>().add(DeleteVideoFromCourseEvent(id: course.id.toString()));
+                                                          ScaffoldMessenger.of(context).showSnackBar(
+                                                            SnackBar(
+                                                              duration: const Duration(seconds: 3),
+                                                              behavior: SnackBarBehavior.floating,
+                                                              elevation: 0,
+                                                              backgroundColor: kGreenColor,
+                                                              content: Row(
+                                                                children: [
+                                                                  const Icon(
+                                                                    Icons.beenhere_rounded,
+                                                                    color: Colors.white,
+                                                                  ),
+                                                                  const SizedBox(width: 12),
+                                                                  Text(
+                                                                    "Delete Video Success",
+                                                                    style: whiteTextStyle.copyWith(
+                                                                      fontSize: 14,
+                                                                      fontWeight: bold,
                                                                     ),
                                                                   ),
-                                                                );
-                                                              } else if (state is DeleteCourseError) {
-                                                                ScaffoldMessenger.of(context).showSnackBar(
-                                                                  SnackBar(
-                                                                    duration: const Duration(seconds: 3),
-                                                                    behavior: SnackBarBehavior.floating,
-                                                                    elevation: 0,
-                                                                    backgroundColor: kRedColor,
-                                                                    content: Row(
-                                                                      children: [
-                                                                        const Icon(
-                                                                          Icons.beenhere_rounded,
-                                                                          color: Colors.white,
-                                                                        ),
-                                                                        const SizedBox(width: 12),
-                                                                        Text(
-                                                                          state.message,
-                                                                          style: whiteTextStyle.copyWith(
-                                                                            fontSize: 14,
-                                                                            fontWeight: bold,
-                                                                          ),
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                  ),
-                                                                );
-                                                              }
-                                                            },
+                                                                ],
+                                                              ),
+                                                            ),
                                                           );
+                                                          Navigator.pop(context);
                                                         },
                                                         child: Text(
                                                           'Delete Now',

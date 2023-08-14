@@ -6,20 +6,10 @@ class AddVideoScreen extends StatefulWidget {
   // final _formKey = GlobalKey<FormState>();
   final TextEditingController titleC = TextEditingController();
   final TextEditingController descriptionC = TextEditingController();
-  final List<String> category = [
-    'Web Development',
-    'Mobile Development',
-    'IOT Development',
-    'Desktop Development',
-    'Artificial Intelligent',
-    'UI/UX Design',
-    'Lainnya...',
-  ];
   String? selectedCategory;
   String categoryValue = '';
 
   AddVideoScreen({super.key});
-
   @override
   State<AddVideoScreen> createState() => _AddVideoScreenState();
 }

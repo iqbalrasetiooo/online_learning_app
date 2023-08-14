@@ -79,16 +79,12 @@ class _AddCourseScreenState extends State<AddCourseScreen> {
     }
 
     Future pickImageFromGallery() async {
-      // final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-      // if (image != null) {
-      //   setState(() {
-      //     imagePath = image.path;
-      //   });
-      // }
       final image = await ImagePicker().pickImage(source: ImageSource.gallery);
 
       if (image == null) return;
-      setState(() {});
+      setState(() {
+        imagePath = image.path;
+      });
       File path = File(image.path);
       String format = image.path.split('.').last;
       final base64String = base64Encode(path.readAsBytesSync());

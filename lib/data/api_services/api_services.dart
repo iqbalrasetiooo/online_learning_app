@@ -57,6 +57,13 @@ class ApiServices {
     );
   }
 
+  Future deleteUser({required String id}) async {
+    return await _postData(
+      relativeUrl: '/user/$id',
+      body: {"id": id},
+    );
+  }
+
   Future deleteVideo({required String id}) async {
     return await _postData(
       relativeUrl: '/course/video/$id',
@@ -74,6 +81,27 @@ class ApiServices {
 
   Future searchCourse({required String query}) async {
     return await getData(relativeUrl: '/course/search?query=$query');
+  }
+
+  Future updateUser({
+    required String id,
+    String gender = '',
+    String dateOfBirth = '',
+    String bio = '',
+    String imgUrl = '',
+    String fullName = '',
+    String username = '',
+  }) async {
+    var body = {
+      "gender": gender,
+      "full_name": fullName,
+      "name": username,
+      "date_of_birth": dateOfBirth,
+      "short_bio": bio,
+      "imageUrl": imgUrl,
+    };
+    print(body);
+    return await _postData(relativeUrl: '/user/$id', body: body);
   }
 
   Future getUser() async {
@@ -143,7 +171,7 @@ class ApiServices {
       "date_of_birth": dateBirth,
       "gender": gender,
       "full_name": fullName,
-      "id_lecturer": "LEC${HelperFunction().generateRandomNumber(5)}",
+      // "id_lecturer": "LEC${HelperFunction().generateRandomNumber(5)}",
       "highest_education": highestEducation,
       "teaching_experience": teachingExperience,
       "education_history": educationHistory,

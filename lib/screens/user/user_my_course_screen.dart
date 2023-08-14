@@ -45,60 +45,67 @@ class MyCourseScreen extends StatelessWidget {
                             itemBuilder: (context, index) {
                               var course = state.joinedCourse.data!.course![index];
                               var lecturer = state.joinedCourse.data!.lecturer![index];
-                              return Container(
-                                margin: const EdgeInsets.only(bottom: 16),
-                                child: Card(
-                                  elevation: 0,
-                                  color: const Color.fromRGBO(64, 75, 96, .9),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Padding(
-                                        padding: const EdgeInsets.all(15),
-                                        child: Row(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: <Widget>[
-                                            Image.asset(
-                                              "assets/logo.png",
-                                              height: 75,
-                                              width: 75,
-                                              fit: BoxFit.cover,
-                                            ),
-                                            Container(width: 20),
-                                            Expanded(
-                                              child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                children: <Widget>[
-                                                  Text(
-                                                    course.title!,
-                                                    style: whiteTextStyle.copyWith(fontSize: 16, fontWeight: bold),
-                                                  ),
-                                                  // Add some spacing between the title and the subtitle
-                                                  Container(height: 5),
-                                                  // Add a subtitle widget
-                                                  Text(
-                                                    lecturer.name!,
-                                                    style: greyTextStyle.copyWith(fontSize: 12, fontWeight: regular),
-                                                  ),
-                                                  // Add some spacing between the subtitle and the text
-                                                  Container(height: 16),
-                                                  // Add a text widget to display some text
-                                                  Text(
-                                                    "Progress ",
-                                                    maxLines: 2,
-                                                    style: whiteTextStyle.copyWith(fontSize: 14),
-                                                  ),
-                                                ],
+                              return InkWell(
+                                onTap: () {
+                                  Navigator.of(context, rootNavigator: true).pushNamed("/detail-course", arguments: {
+                                    "id_course": course.id.toString(),
+                                    "title": course.title,
+                                    "category_name": course.categoryName,
+                                    "description": course.description,
+                                    "lecturer_name": lecturer.name,
+                                  });
+                                },
+                                child: Container(
+                                  margin: const EdgeInsets.only(bottom: 16),
+                                  child: Card(
+                                    elevation: 0,
+                                    color: const Color.fromRGBO(64, 75, 96, .9),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: const EdgeInsets.all(15),
+                                          child: Row(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: <Widget>[
+                                              Image.asset(
+                                                "assets/logo.png",
+                                                height: 75,
+                                                width: 75,
+                                                fit: BoxFit.cover,
                                               ),
-                                            ),
-                                          ],
+                                              Container(width: 20),
+                                              Expanded(
+                                                child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: <Widget>[
+                                                    Text(
+                                                      course.title!,
+                                                      style: whiteTextStyle.copyWith(fontSize: 16, fontWeight: bold),
+                                                    ),
+                                                    // Add some spacing between the title and the subtitle
+                                                    Container(height: 6),
+                                                    Text(
+                                                      "oleh : ${lecturer.name!}",
+                                                      style: greyTextStyle.copyWith(fontSize: 12, fontWeight: regular),
+                                                    ),
+                                                    Container(height: 16),
+                                                    Text(
+                                                      "${course.categoryName}",
+                                                      style: greyTextStyle.copyWith(fontSize: 12, fontWeight: regular),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
                               );
@@ -142,60 +149,67 @@ class MyCourseScreen extends StatelessWidget {
                                   itemBuilder: (context, index) {
                                     var course = state.joinedCourse.data!.course![index];
                                     var lecturer = state.joinedCourse.data!.lecturer![index];
-                                    return Container(
-                                      margin: const EdgeInsets.only(bottom: 16),
-                                      child: Card(
-                                        elevation: 0,
-                                        color: const Color.fromRGBO(64, 75, 96, .9),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(20),
-                                        ),
-                                        clipBehavior: Clip.antiAliasWithSaveLayer,
-                                        child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: <Widget>[
-                                            Padding(
-                                              padding: const EdgeInsets.all(15),
-                                              child: Row(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                children: <Widget>[
-                                                  Image.asset(
-                                                    "assets/logo.png",
-                                                    height: 75,
-                                                    width: 75,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                  Container(width: 20),
-                                                  Expanded(
-                                                    child: Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                                      children: <Widget>[
-                                                        Text(
-                                                          course.title!,
-                                                          style: whiteTextStyle.copyWith(fontSize: 16, fontWeight: bold),
-                                                        ),
-                                                        // Add some spacing between the title and the subtitle
-                                                        Container(height: 5),
-                                                        // Add a subtitle widget
-                                                        Text(
-                                                          lecturer.name!,
-                                                          style: greyTextStyle.copyWith(fontSize: 12, fontWeight: regular),
-                                                        ),
-                                                        // Add some spacing between the subtitle and the text
-                                                        Container(height: 16),
-                                                        // Add a text widget to display some text
-                                                        Text(
-                                                          "Progress ",
-                                                          maxLines: 2,
-                                                          style: whiteTextStyle.copyWith(fontSize: 14),
-                                                        ),
-                                                      ],
+                                    return InkWell(
+                                      onTap: () {
+                                        Navigator.of(context, rootNavigator: true).pushNamed("/detail-course", arguments: {
+                                          "id_course": course.id.toString(),
+                                          "title": course.title,
+                                          "category_name": course.categoryName,
+                                          "description": course.description,
+                                          "lecturer_name": lecturer.name,
+                                        });
+                                      },
+                                      child: Container(
+                                        margin: const EdgeInsets.only(bottom: 16),
+                                        child: Card(
+                                          elevation: 0,
+                                          color: const Color.fromRGBO(64, 75, 96, .9),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(20),
+                                          ),
+                                          clipBehavior: Clip.antiAliasWithSaveLayer,
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: <Widget>[
+                                              Padding(
+                                                padding: const EdgeInsets.all(15),
+                                                child: Row(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: <Widget>[
+                                                    Image.asset(
+                                                      "assets/logo.png",
+                                                      height: 75,
+                                                      width: 75,
+                                                      fit: BoxFit.cover,
                                                     ),
-                                                  ),
-                                                ],
+                                                    Container(width: 20),
+                                                    Expanded(
+                                                      child: Column(
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                                        children: <Widget>[
+                                                          Text(
+                                                            course.title!,
+                                                            style: whiteTextStyle.copyWith(fontSize: 16, fontWeight: bold),
+                                                          ),
+                                                          // Add some spacing between the title and the subtitle
+                                                          Container(height: 6),
+                                                          Text(
+                                                            "oleh : ${lecturer.name!}",
+                                                            style: greyTextStyle.copyWith(fontSize: 12, fontWeight: regular),
+                                                          ),
+                                                          Container(height: 16),
+                                                          Text(
+                                                            "${course.categoryName}",
+                                                            style: greyTextStyle.copyWith(fontSize: 12, fontWeight: regular),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
-                                            ),
-                                          ],
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     );

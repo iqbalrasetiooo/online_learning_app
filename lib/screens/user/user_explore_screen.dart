@@ -211,11 +211,19 @@ class _ExploreScreenState extends State<ExploreScreen> {
                             } else if (state is SearchCourseSuccess) {
                               var dataLength = state.result.data!.length;
                               return (state.result.data!.isEmpty)
-                                  ? Center(child: Text("Kursus tidak ditemukan"))
+                                  ? Center(
+                                      child: Text(
+                                        "Kursus tidak ditemukan",
+                                        style: redTextStyle.copyWith(
+                                          fontSize: 14,
+                                          fontWeight: regular,
+                                        ),
+                                      ),
+                                    )
                                   : ListView.builder(
                                       scrollDirection: Axis.vertical,
                                       shrinkWrap: true,
-                                      physics: NeverScrollableScrollPhysics(),
+                                      physics: const NeverScrollableScrollPhysics(),
                                       itemCount: dataLength,
                                       itemBuilder: (context, index) {
                                         var result = state.result.data![index];

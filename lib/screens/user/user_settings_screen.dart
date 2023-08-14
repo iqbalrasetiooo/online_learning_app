@@ -24,11 +24,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 padding: const EdgeInsets.only(top: 75),
                 child: Column(
                   children: [
-                    const SizedBox(
-                      height: 100,
-                      width: 100,
-                      child: CircleAvatar(),
-                    ),
                     const SizedBox(height: 16),
                     BlocBuilder<CheckLoginBloc, CheckLoginState>(
                       builder: (context, state) {
