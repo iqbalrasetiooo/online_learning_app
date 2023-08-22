@@ -1,24 +1,23 @@
-class GetVideoByCourseIdAndAuthorIdModel {
+class IsWatchedModel {
   bool? result;
   String? message;
   List<Data>? data;
   String? error;
 
-  GetVideoByCourseIdAndAuthorIdModel({
-    this.result,
-    this.message,
-    this.data,
-    this.error,
-  });
+  IsWatchedModel({this.result, this.message, this.data, this.error});
 
-  GetVideoByCourseIdAndAuthorIdModel.fromJson(Map<String, dynamic> json) {
+  IsWatchedModel.fromJson(Map<String, dynamic> json) {
     result = json['result'];
     message = json['message'];
     if (json['data'] != null) {
       data = <Data>[];
-      json['data'].forEach((v) {
-        data!.add(Data.fromJson(v));
-      });
+      if (json['data'] is List) {
+        for (var v in json['data']) {
+          data!.add(Data.fromJson(v));
+        }
+      } else if (json['data'] is Map<String, dynamic>) {
+        data!.add(Data.fromJson(json['data']));
+      }
     }
     error = json['error'];
   }
@@ -37,45 +36,31 @@ class GetVideoByCourseIdAndAuthorIdModel {
 
 class Data {
   int? id;
-  int? courseId;
-  int? authorId;
-  String? video;
+  int? videoId;
+  int? userId;
   String? createdAt;
   String? updatedAt;
-  String? title;
-  int? isWatched;
+  int? status;
 
-  Data({
-    this.id,
-    this.courseId,
-    this.authorId,
-    this.video,
-    this.createdAt,
-    this.updatedAt,
-    this.title,
-  });
+  Data({this.id, this.videoId, this.userId, this.createdAt, this.updatedAt, this.status});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    courseId = json['course_id'];
-    authorId = json['author_id'];
-    video = json['video'];
+    videoId = json['video_id'];
+    userId = json['user_id'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    title = json['title'];
-    isWatched = json['is_watched'];
+    status = json['status'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
-    data['course_id'] = this.courseId;
-    data['author_id'] = this.authorId;
-    data['video'] = this.video;
+    data['video_id'] = this.videoId;
+    data['user_id'] = this.userId;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
-    data['title'] = this.title;
-    data['is_watched'] = this.isWatched;
+    data['status'] = this.status;
     return data;
   }
 }

@@ -238,7 +238,7 @@ class LecturerHomeScreen extends StatelessWidget {
                                                                   ),
                                                                   const SizedBox(width: 12),
                                                                   Text(
-                                                                    "Delete Video Success",
+                                                                    "Delete Course Success",
                                                                     style: whiteTextStyle.copyWith(
                                                                       fontSize: 14,
                                                                       fontWeight: bold,

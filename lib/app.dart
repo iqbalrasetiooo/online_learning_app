@@ -1,6 +1,10 @@
+import 'package:online_learning_app/bloc/auth/add_lecturer/add_lecturer_bloc.dart';
+import 'package:online_learning_app/bloc/auth/create_watch/create_watch_bloc.dart';
+import 'package:online_learning_app/bloc/auth/is_watched/is_watched_bloc.dart';
 import 'package:online_learning_app/bloc/course/category/add_category/add_category_bloc.dart';
 import 'package:online_learning_app/bloc/course/video/get_video_by_id/get_video_by_id_bloc.dart';
 import 'package:online_learning_app/bloc/user/delete_user/delete_user_bloc.dart';
+// import 'package:online_learning_app/bloc/watch/watch_bloc.dart';
 import 'package:online_learning_app/screens/admin/add_category_screen.dart';
 import 'package:online_learning_app/screens/user/user_edit_profile_screen.dart';
 
@@ -75,6 +79,15 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => DeleteUserBloc(),
+        ),
+        BlocProvider(
+          create: (context) => CreateWatchBloc(),
+        ),
+        BlocProvider(
+          create: (context) => IsWatchedBloc(),
+        ),
+        BlocProvider(
+          create: (context) => AddLecturerBloc(),
         ),
       ],
       child: const App(),

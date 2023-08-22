@@ -1,5 +1,4 @@
 import 'package:online_learning_app/bloc/course/join_course/join_bloc.dart';
-import 'package:online_learning_app/bloc/course/video/get_video_by_course_id_and_author_id/get_video_by_course_id_and_author_id_bloc.dart';
 import 'package:online_learning_app/data/models/course/course_model.dart';
 
 import '../../../export.dart';
@@ -114,6 +113,13 @@ class JoinCourseScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(Icons.keyboard_arrow_left),
+                  ),
+                  const SizedBox(height: 20),
                   Text(
                     'Deskripsi',
                     style: blackTextStyle.copyWith(
@@ -135,78 +141,7 @@ class JoinCourseScreen extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                  // NOTE: PHOTOS
-                  Text(
-                    'Materi',
-                    style: blackTextStyle.copyWith(
-                      fontSize: 16,
-                      fontWeight: semibold,
-                    ),
-                  ),
-                  BlocBuilder<GetVideoByCourseIdAndAuthorIdBloc, GetVideoByCourseIdAndAuthorIdState>(
-                    bloc: context.read<GetVideoByCourseIdAndAuthorIdBloc>()..add(VideoByCourseIdAndAuthorIdEvent(courseId: course.id.toString())),
-                    builder: (context, state) {
-                      if (state is GetVideoByCourseIdAndAuthorIdLoading) {
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      } else if (state is GetVideoByCourseIdAndAuthorIdError) {
-                        return Center(
-                          child: Text(state.message),
-                        );
-                      } else if (state is GetVideoByCourseIdAndAuthorIdSuccess) {
-                        if (state.video.data != null && state.video.data!.isNotEmpty) {
-                          return ListView.builder(
-                            scrollDirection: Axis.vertical,
-                            shrinkWrap: true,
-                            itemCount: state.video.data!.length,
-                            itemBuilder: (context, index) {
-                              var data = state.video.data![index];
-                              return InkWell(
-                                onTap: () {},
-                                child: Container(
-                                  margin: const EdgeInsets.only(bottom: 16),
-                                  child: ListTile(
-                                    contentPadding: const EdgeInsets.symmetric(vertical: 6, horizontal: 16),
-                                    tileColor: kTileColor.withOpacity(0.4),
-                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-                                    leading: Text(
-                                      "${index + 1}",
-                                      style: whiteTextStyle.copyWith(
-                                        fontSize: 18,
-                                        fontWeight: bold,
-                                      ),
-                                    ),
-                                    title: Text(
-                                      data.title!,
-                                      style: whiteTextStyle.copyWith(
-                                        fontSize: 16,
-                                        fontWeight: regular,
-                                      ),
-                                    ),
-                                    trailing: const Icon(
-                                      Icons.check_circle,
-                                      size: 30,
-                                      color: Colors.green,
-                                    ),
-                                  ),
-                                ),
-                              );
-                            },
-                          );
-                        } else {
-                          return Center(
-                            child: Text(
-                              'Belum ada video',
-                              style: redTextStyle.copyWith(fontSize: 14, fontWeight: medium),
-                            ),
-                          );
-                        }
-                      } else {
-                        return const Text('error');
-                      }
-                    },
-                  ),
+                  //
                   const Row(
                     children: [
                       // InterestItem(title: 'Kids Park'),

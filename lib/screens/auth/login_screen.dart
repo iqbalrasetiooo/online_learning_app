@@ -162,34 +162,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
-              const SizedBox(height: 8),
-              Align(
-                alignment: Alignment.centerRight,
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    elevation: 0,
-                    padding: EdgeInsets.zero,
-                    minimumSize: const Size(50, 30),
-                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                    alignment: Alignment.centerRight,
-                  ),
-                  child: Text(
-                    'Forgot Password?',
-                    style: greyTextStyle.copyWith(
-                      fontSize: 12,
-                      fontWeight: regular,
-                    ),
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ForgotPasswordScreen(),
-                      ),
-                    );
-                  },
-                ),
-              ),
               const SizedBox(height: 50),
               BlocConsumer<LoginBloc, LoginState>(
                 listener: (context, state) {

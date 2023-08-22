@@ -64,6 +64,19 @@ class ApiServices {
     );
   }
 
+  Future createWatch({required String videoId}) async {
+    String? user = await storage.readData('user');
+    UserModelStorage appUserModel = UserModelStorage.deserialize(user!);
+    String userId = appUserModel.idUser;
+    return await _postData(
+      relativeUrl: '/watch',
+      body: {
+        "video_id": videoId,
+        "user_id": userId,
+      },
+    );
+  }
+
   Future deleteVideo({required String id}) async {
     return await _postData(
       relativeUrl: '/course/video/$id',
@@ -125,7 +138,20 @@ class ApiServices {
   }
 
   Future getVideoByCourseIdAndAuthorId({required String id}) async {
+    String? user = await storage.readData('user');
+    UserModelStorage appUserModel = UserModelStorage.deserialize(user!);
+    String userId = appUserModel.idUser;
     return await getData(relativeUrl: '/course/video/$id');
+  }
+
+  Future getWatchedVideos({required String videoId}) async {
+    String? user = await storage.readData('user');
+    UserModelStorage appUserModel = UserModelStorage.deserialize(user!);
+    String userId = appUserModel.idUser;
+    return await _postData(relativeUrl: '/watched', body: {
+      "video_id": videoId,
+      "user_id": userId,
+    });
   }
 
   Future register({
@@ -217,7 +243,7 @@ class ApiServices {
       'image': image,
     };
     print(body);
-    return await _postData(relativeUrl: '/course/add', body: body);
+    return await _postData(relativeUrl: '/', body: body);
   }
 
   Future joinCourse({

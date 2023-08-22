@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:image_picker/image_picker.dart';
 import 'package:online_learning_app/data/models/app/category_model.dart';
@@ -66,7 +67,7 @@ class _AddCourseScreenState extends State<AddCourseScreen> {
               AddNewCourseEvent(
                 categoryId: selectedCategory,
                 desc: desc.text,
-                image: imagePath.toString(),
+                image: _base64.toString(),
                 title: title.text,
               ),
             );
@@ -300,34 +301,34 @@ class _AddCourseScreenState extends State<AddCourseScreen> {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        imagePath != null
-                            ? Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  IconButton(onPressed: removeImage, icon: const Icon(Icons.delete)),
-                                  SizedBox(
-                                    width: double.infinity,
-                                    child: Image.file(
-                                      File(imagePath!),
-                                      width: 500,
-                                      height: 200,
-                                    ),
-                                  ),
-                                ],
-                              )
-                            : const Text('ukuran 200x200'),
-                        const SizedBox(height: 12),
-                        ElevatedButton(
-                          onPressed: pickImageFromGallery,
-                          child: const Text('Pilih gambar'),
-                        ),
-                      ],
-                    ),
-                  ),
+                  // Center(
+                  //   child: Column(
+                  //     mainAxisAlignment: MainAxisAlignment.center,
+                  //     children: [
+                  //       imagePath != null
+                  //           ? Column(
+                  //               crossAxisAlignment: CrossAxisAlignment.end,
+                  //               children: [
+                  //                 IconButton(onPressed: removeImage, icon: const Icon(Icons.delete)),
+                  //                 SizedBox(
+                  //                   width: double.infinity,
+                  //                   child: Image.file(
+                  //                     File(imagePath!),
+                  //                     width: 500,
+                  //                     height: 200,
+                  //                   ),
+                  //                 ),
+                  //               ],
+                  //             )
+                  //           : const Text('ukuran 200x200'),
+                  //       const SizedBox(height: 12),
+                  //       ElevatedButton(
+                  //         onPressed: pickImageFromGallery,
+                  //         child: const Text('Pilih gambar'),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
                   const SizedBox(height: 20),
                   BlocConsumer<AddCourseBloc, AddCourseState>(
                     listener: (context, state) {

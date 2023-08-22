@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:online_learning_app/bloc/auth/create_watch/create_watch_bloc.dart';
+import 'package:online_learning_app/bloc/auth/is_watched/is_watched_bloc.dart';
 import 'package:online_learning_app/bloc/course/video/get_video_by_course_id_and_author_id/get_video_by_course_id_and_author_id_bloc.dart';
 import 'package:online_learning_app/bloc/course/video/get_video_by_id/get_video_by_id_bloc.dart';
 import 'package:online_learning_app/screens/user/video/user_video_list.dart';
@@ -169,9 +171,50 @@ class _VideoPlayerState extends State<VideoPlayer> {
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             _space,
-                            Text(
-                              "Materi ke : ${widget.args["materi"]}",
-                              style: greyTextStyle.copyWith(fontWeight: regular),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Materi ke : ${widget.args["materi"]}",
+                                  style: greyTextStyle.copyWith(fontWeight: regular),
+                                ),
+                                BlocListener<CreateWatchBloc, CreateWatchState>(
+                                  listener: (context, state) {
+                                    if (state is CreateWatchSuccess) {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          duration: const Duration(seconds: 5),
+                                          behavior: SnackBarBehavior.floating,
+                                          backgroundColor: kGreenColor,
+                                          content: Row(
+                                            children: [
+                                              const Icon(Icons.beenhere_rounded, color: Colors.white),
+                                              const SizedBox(width: 12),
+                                              Text(
+                                                'Mark to watched Videos',
+                                                style: whiteTextStyle.copyWith(
+                                                  fontSize: 14,
+                                                  fontWeight: bold,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                  },
+                                  child: TextButton(
+                                    onPressed: () {
+                                      context.read<CreateWatchBloc>().add(CreateWatchedVideos(videoId: widget.args["id_video"]));
+                                      setState(() {});
+                                    },
+                                    child: const Icon(
+                                      Icons.check,
+                                      color: kUnavailableColor,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                             _space,
                             Text(
@@ -181,6 +224,7 @@ class _VideoPlayerState extends State<VideoPlayer> {
                                 fontWeight: bold,
                               ),
                             ),
+                            _space,
                             _space,
                             _space,
                             CustomButton(

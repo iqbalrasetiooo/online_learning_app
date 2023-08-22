@@ -150,6 +150,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                                       child: Row(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
+                                          // course.image == null ? Container()
                                           Container(
                                             width: 100,
                                             height: 100,

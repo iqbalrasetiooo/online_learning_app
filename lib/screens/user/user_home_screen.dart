@@ -163,7 +163,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     ),
                                                     Container(height: 6),
                                                     Text(
-                                                      "oleh : ${lecturer.name!}",
+                                                      "by ${lecturer.name!}",
                                                       style: greyTextStyle.copyWith(fontSize: 12, fontWeight: regular),
                                                     ),
                                                     Container(height: 16),
@@ -273,7 +273,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         ),
                                                         Container(height: 6),
                                                         Text(
-                                                          "oleh : ${lecturer.name!}",
+                                                          "by ${lecturer.name!}",
                                                           style: greyTextStyle.copyWith(fontSize: 12, fontWeight: regular),
                                                         ),
                                                         Container(height: 16),

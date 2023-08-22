@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:online_learning_app/bloc/auth/add_lecturer/add_lecturer_bloc.dart';
 import 'package:online_learning_app/export.dart';
 
 class AddLecturerScreen extends StatefulWidget {
@@ -193,7 +194,12 @@ class _AddLecturerScreenState extends State<AddLecturerScreen> {
                     ),
                     suffixIcon: IconButton(
                       onPressed: showPassword,
-                      icon: _obscureText == true ? const Icon(Icons.visibility_off, size: 20) : const Icon(Icons.visibility, size: 20),
+                      icon: _obscureText == true
+                          ? const Icon(
+                              Icons.visibility_off,
+                              size: 20,
+                            )
+                          : const Icon(Icons.visibility, size: 20),
                       color: kPrimaryColor,
                     ),
                   ),
@@ -247,9 +253,8 @@ class _AddLecturerScreenState extends State<AddLecturerScreen> {
                       onPressed: () {
                         (state is RegisterLoading)
                             ? null
-                            : context.read<RegisterBloc>().add(
-                                  RegisterUserEvent(
-                                    role: "LECTURER",
+                            : context.read<AddLecturerBloc>().add(
+                                  AddNewLecturerEvent(
                                     email: regisEmailC.text,
                                     password: regisPasswordC.text,
                                     fullName: nameC.text,

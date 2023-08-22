@@ -24,32 +24,7 @@ class ProfileScreen extends StatelessWidget {
                       },
                       icon: const Icon(Icons.arrow_back_ios, size: 20),
                     ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.of(context, rootNavigator: true).pushNamed('/edit-profile');
-                        // Navigator.of(context).push(
-                        //   MaterialPageRoute(
-                        //     builder: (context) => const EditProfileScreen(),
-                        //   ),
-                        // );
-                      },
-                      child: Text(
-                        'Lengkapi Data',
-                        style: orangeTextStyle.copyWith(
-                          fontSize: 14,
-                          fontWeight: regular,
-                        ),
-                      ),
-                    ),
                   ],
-                ),
-                const SizedBox(height: 25),
-                const Center(
-                  child: SizedBox(
-                    height: 100,
-                    width: 100,
-                    child: CircleAvatar(),
-                  ),
                 ),
                 const SizedBox(height: 25),
                 const Divider(),
@@ -141,53 +116,6 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 const Divider(),
-                const SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Jenis Kelamin',
-                      style: blackTextStyle.copyWith(fontSize: 14, fontWeight: semibold),
-                    ),
-                    Text(
-                      '-',
-                      style: blackTextStyle.copyWith(fontSize: 14, fontWeight: medium),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                const Divider(),
-                const SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Tanggal Lahir',
-                      style: blackTextStyle.copyWith(fontSize: 14, fontWeight: semibold),
-                    ),
-                    Text(
-                      '-',
-                      style: blackTextStyle.copyWith(fontSize: 14, fontWeight: medium),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                const Divider(),
-                const SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Bio',
-                      style: blackTextStyle.copyWith(fontSize: 14, fontWeight: semibold),
-                    ),
-                    Text(
-                      '-',
-                      style: blackTextStyle.copyWith(fontSize: 14, fontWeight: medium),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
               ],
             ),
           ),
